@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="c232eea100e64abe9211d3c23aeac7b3" Name="Diagram1" ZoomLevel="86">
+        <EntityTypeShape EntityType="AdministrationModel.Administration" Width="1.5" PointX="3.5" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="AdministrationModel.Application" Width="1.5" PointX="1.125" PointY="2.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="AdministrationModel.Population" Width="1.5" PointX="3.5" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="AdministrationModel.Staff" Width="1.5" PointX="5.5" PointY="2.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="AdministrationModel.sysdiagram" Width="1.5" PointX="8.75" PointY="4.625" IsExpanded="true" />
+        <AssociationConnector Association="AdministrationModel.FK_Administration_Application" ManuallyRouted="false" />
+        <AssociationConnector Association="AdministrationModel.FK_Administration_Population" ManuallyRouted="false" />
+        <AssociationConnector Association="AdministrationModel.FK_Administration_Staff" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

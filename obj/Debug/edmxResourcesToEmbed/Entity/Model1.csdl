@@ -1,0 +1,124 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="AdministrationModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Administration">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Title" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Mail" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="IDPopulation" Type="Int32" Nullable="false" />
+    <Property Name="IDApplication" Type="Int32" Nullable="false" />
+    <Property Name="IDStaff" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Application" Relationship="Self.FK_Administration_Application" FromRole="Administration" ToRole="Application" />
+    <NavigationProperty Name="Population" Relationship="Self.FK_Administration_Population" FromRole="Administration" ToRole="Population" />
+    <NavigationProperty Name="Staff" Relationship="Self.FK_Administration_Staff" FromRole="Administration" ToRole="Staff" />
+  </EntityType>
+  <EntityType Name="Application">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Surname" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Patronymic" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Gender" Type="String" MaxLength="1" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Date_of_birth" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Phone" Type="String" MaxLength="11" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Reason_for_the_application" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Administrations" Relationship="Self.FK_Administration_Application" FromRole="Application" ToRole="Administration" />
+  </EntityType>
+  <EntityType Name="Population">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Surname" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Patronymic" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Gender" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+    <Property Name="Date_of_birth" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Phone" Type="String" MaxLength="11" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Administrations" Relationship="Self.FK_Administration_Population" FromRole="Population" ToRole="Administration" />
+  </EntityType>
+  <EntityType Name="Staff">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Surname" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Patronymic" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Date_of_birth" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="Post" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Administrations" Relationship="Self.FK_Administration_Staff" FromRole="Staff" ToRole="Administration" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <Association Name="FK_Administration_Application">
+    <End Role="Application" Type="Self.Application" Multiplicity="1" />
+    <End Role="Administration" Type="Self.Administration" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Application">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Administration">
+        <PropertyRef Name="IDApplication" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Administration_Population">
+    <End Role="Population" Type="Self.Population" Multiplicity="1" />
+    <End Role="Administration" Type="Self.Administration" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Population">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Administration">
+        <PropertyRef Name="IDPopulation" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Administration_Staff">
+    <End Role="Staff" Type="Self.Staff" Multiplicity="1" />
+    <End Role="Administration" Type="Self.Administration" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Staff">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Administration">
+        <PropertyRef Name="IDStaff" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="AdministrationEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Administrations" EntityType="Self.Administration" />
+    <EntitySet Name="Applications" EntityType="Self.Application" />
+    <EntitySet Name="Populations" EntityType="Self.Population" />
+    <EntitySet Name="Staffs" EntityType="Self.Staff" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+    <AssociationSet Name="FK_Administration_Application" Association="Self.FK_Administration_Application">
+      <End Role="Application" EntitySet="Applications" />
+      <End Role="Administration" EntitySet="Administrations" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Administration_Population" Association="Self.FK_Administration_Population">
+      <End Role="Population" EntitySet="Populations" />
+      <End Role="Administration" EntitySet="Administrations" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Administration_Staff" Association="Self.FK_Administration_Staff">
+      <End Role="Staff" EntitySet="Staffs" />
+      <End Role="Administration" EntitySet="Administrations" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
